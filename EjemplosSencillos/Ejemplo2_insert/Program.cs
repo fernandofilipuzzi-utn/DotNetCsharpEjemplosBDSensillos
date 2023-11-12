@@ -13,6 +13,8 @@ namespace Ejemplo2
     {
         static void Main(string[] args)
         {
+            List<string> productos = new List<string> { "tomate", "mandarina", "arroz" };
+
             #region parámetros
             string servidor = "TSP\\SQLEXPRESS";
             string baseDatos = "envios";
@@ -26,15 +28,19 @@ namespace Ejemplo2
             try
             { 
                 conn.Open();
-                
-                string sql = "insert into productos (nombre) values (@nombre) ";
 
-                command = new SqlCommand(sql, conn);
-                command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
-                command.Parameters[0].Value = "tomates";
-                Int32 rowsaffected = command.ExecuteNonQuery();
+                Int32 rowsaffected = 0;
+                foreach (string producto in productos)
+                {
+                    string sql = "insert into productos (nombre) values (@nombre) ";
 
-                Console.WriteLine("Cantidad de líneas insertadas {0}:", rowsaffected);
+                    command = new SqlCommand(sql, conn);
+                    command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
+                    command.Parameters[0].Value = "tomates";
+                    rowsaffected += command.ExecuteNonQuery();
+                }
+
+                Console.WriteLine($"Cantidad de líneas insertadas: {rowsaffected}");
             }
             catch (Exception e)
             {

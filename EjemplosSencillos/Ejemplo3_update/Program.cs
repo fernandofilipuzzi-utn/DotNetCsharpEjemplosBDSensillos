@@ -1,22 +1,19 @@
-﻿using System;
+﻿using ModelClassLibrary.Models;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-using System.Data.OleDb;
-using System.Data.SqlClient;
-using System.Data;
-using ModelClassLibrary.Models;
-
-namespace Ejemplo2_insert
+namespace Ejemplo3_update
 {
     class Program
     {
         static void Main(string[] args)
         {
-            List<Producto> productos = new List<Producto> { new Producto { Nombre = "tomate" },
-                                                             new Producto { Nombre = "mandarina" } ,
-                                                             new Producto {  Nombre = "arroz" }};
+            List<Producto> productos = new List<Producto> { new Producto { ID = 1, Nombre = "tomate" }, new Producto { ID = 1, Nombre = "tomate" } };
 
             #region parámetros
             string servidor = "TSP\\SQLEXPRESS";
@@ -29,17 +26,22 @@ namespace Ejemplo2_insert
             SqlConnection conn = new SqlConnection(cadenaConexion);
             SqlCommand command = null;
             try
-            { 
+            {
                 conn.Open();
 
                 Int32 rowsaffected = 0;
                 foreach (Producto producto in productos)
                 {
-                    string sql = "insert into productos (nombre) values (@nombre) ";
+                    string sql = "update productos set nombre=@nombre where id=@id";
 
                     command = new SqlCommand(sql, conn);
+
                     command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
-                    command.Parameters[0].Value = producto.Nombre;
+                    command.Parameters["@nombre"].Value = producto.Nombre;
+
+                    command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                    command.Parameters["@id"].Value = producto.ID;
+
                     rowsaffected += command.ExecuteNonQuery();
                 }
 
@@ -51,7 +53,7 @@ namespace Ejemplo2_insert
             }
             finally
             {
-                if(conn!=null) conn.Close();
+                if (conn != null) conn.Close();
             }
 
             Console.ReadKey();

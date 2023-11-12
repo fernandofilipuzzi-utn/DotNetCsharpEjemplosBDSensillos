@@ -1,0 +1,22 @@
+﻿
+
+create table lotes(
+	id serial, 
+	fechaproduccion date
+);
+
+create table productos(
+	id serial, 
+	nombre character varying(52)	
+);
+
+create table lotes_productos(
+	idlote integer,
+	idproducto integer
+);
+
+insert into productos (nombre) values ('arroz');
+insert into productos (nombre) values ('fideos');
+
+
+select * from productos

@@ -8,8 +8,8 @@
     <ProjectGuid>{3EB229C5-91BF-4C48-AED5-089D303C6DEC}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ejemplo2</RootNamespace>
-    <AssemblyName>Ejemplo2</AssemblyName>
+    <RootNamespace>Ejemplo2_insert</RootNamespace>
+    <AssemblyName>Ejemplo2_insert</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
 using System.Data.SqlClient;
 
-namespace Ejemplo1
+namespace Ejemplo1_select
 {
     class Program
     {
@@ -41,10 +40,10 @@ namespace Ejemplo1
                     #region nombre
                     string nombre = "";
                     if (dataReader[1] != DBNull.Value)
-                        nombre = (string)dataReader[1];
+                        nombre = dataReader[1] as string;
                     #endregion
 
-                    Console.WriteLine("\t\t{0,10} | {1,20} ", id, nombre);
+                    Console.WriteLine($"\t\t{id,10} | {nombre,20} ");
                 }
             }
             catch (Exception e)

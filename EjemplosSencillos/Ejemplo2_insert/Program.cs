@@ -7,7 +7,7 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace Ejemplo2
+namespace Ejemplo2_insert
 {
     class Program
     {

@@ -1,13 +1,13 @@
-﻿using Microsoft.Data.Sqlite;
-using ModelClassLibrary.Models;
-using ModelClassLibrary.servicios;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
-namespace Ejemplo2_insert
+using System.Data.SqlClient;
+using System.Data.SQLite;
+using ModelClassLibrary.Models;
+
+namespace Ejemplo3_insert
 {
     class Program
     {
@@ -19,7 +19,7 @@ namespace Ejemplo2_insert
 
             string connectionString = "Data Source=../../../mydatabase.db;Version=3;";
 
-            SQLiteConnection conn=null;
+            SQLiteConnection conn =null;
             try
             {
                 conn = new SQLiteConnection(connectionString);
@@ -27,7 +27,7 @@ namespace Ejemplo2_insert
 
                 string sql = "select id, nombre from productos ";
 
-                using (var query = new SqliteCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
                     SQLiteDataReader dataReader = query.ExecuteReader();
                     while (dataReader.Read())

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using System.Data.SqlClient;
-using ModelClassLibrary.servicios;
 using System.Data.SQLite;
 
 namespace Ejemplo1_select
@@ -23,7 +22,7 @@ namespace Ejemplo1_select
                 conn.Open();
 
                 string sql = "CREATE TABLE IF NOT EXISTS productos (id int unique, nombre TEXT)";
-                using (var query = new SqliteCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
                     query.ExecuteNonQuery();
                 }

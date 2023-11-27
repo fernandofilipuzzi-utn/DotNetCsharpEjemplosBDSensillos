@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Data;
-using ModelClassLibrary.Models;
-using Microsoft.Data.Sqlite;
-using ModelClassLibrary.servicios;
 using System.Data.SQLite;
+using ModelClassLibrary.Models;
+using System.Data;
 
-namespace Ejemplo2_insert
+namespace Ejemplo3_insert
 {
     class Program
     {
@@ -21,17 +18,12 @@ namespace Ejemplo2_insert
                                                              new Producto { Nombre = "mandarina" } ,
                                                              new Producto {  Nombre = "arroz" }};
 
-            #region parámetros
-            string servidor = "TSP\\SQLEXPRESS";
-            string baseDatos = "envios";
-            #endregion
+            string cadenaConexion= "Data Source=../../../mydatabase.db;Version=3;";
 
-            // Cadena de conexión para SQL Server con autenticación de Windows
-            string cadenaConexion = $"Data Source={servidor};Initial Catalog={baseDatos};Integrated Security=True;";
-
-            SqlConnection conn = new SqlConnection(cadenaConexion);
+            SQLiteConnection conn = null;
             try
             {
+                conn = new SQLiteConnection(cadenaConexion);
                 conn.Open();
 
                 Int32 rowsaffected = 0;
@@ -39,10 +31,9 @@ namespace Ejemplo2_insert
                 {
                     string sql = "insert into productos (nombre) values (@nombre) ";
 
-                    using (var query = new SQLiteCommand(sql, ManagerDb.Instance.Connection))
+                    using (var query = new SQLiteCommand(sql, conn))
                     {
-                        query.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
-                        query.Parameters[0].Value = producto.Nombre;
+                        query.Parameters.AddWithValue("@nombre", producto.Nombre);
                         rowsaffected += query.ExecuteNonQuery();
                     }
                 }

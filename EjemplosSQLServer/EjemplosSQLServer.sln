@@ -3,22 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.34114.132
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo1_dll", "Ejemplo1_dll\Ejemplo1_dll.csproj", "{788108F4-D947-4EFF-B40B-2E21D0C02C61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo1_ddl", "Ejemplo1_ddl\Ejemplo1_ddl.csproj", "{788108F4-D947-4EFF-B40B-2E21D0C02C61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo2_select", "Ejemplo2_select\Ejemplo2_select.csproj", "{5AD2B6E2-B7B9-4890-B470-FBDE4744A118}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelClassLibrary", "ModelClassLibrary\ModelClassLibrary.csproj", "{06DE17C5-E249-4913-A5AC-FFD57643918D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo2_select", "Ejemplo2_select\Ejemplo2_select.csproj", "{3EB229C5-91BF-4C48-AED5-089D303C6DEC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo3_insert", "Ejemplo3_insert\Ejemplo3_insert.csproj", "{4EC7D3B6-0E58-47EA-8DA7-8F3016ED1FAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo3_insert", "Ejemplo3_insert\Ejemplo3_insert.csproj", "{3EB229C5-91BF-4C48-AED5-089D303C6DEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo4_update", "Ejemplo4_update\Ejemplo4_update.csproj", "{1C05D89F-9E92-48E0-92B1-F3374063CBA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo5_delete", "Ejemplo5_delete\Ejemplo5_delete.csproj", "{B51F2A6A-7A47-4883-A62B-F42143DEE7FB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1BB9C6CF-10B8-4376-8928-D4F87144EB41}"
-	ProjectSection(SolutionItems) = preProject
-		mydatabase.db = mydatabase.db
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +25,10 @@ Global
 		{788108F4-D947-4EFF-B40B-2E21D0C02C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{788108F4-D947-4EFF-B40B-2E21D0C02C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{788108F4-D947-4EFF-B40B-2E21D0C02C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD2B6E2-B7B9-4890-B470-FBDE4744A118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD2B6E2-B7B9-4890-B470-FBDE4744A118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD2B6E2-B7B9-4890-B470-FBDE4744A118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD2B6E2-B7B9-4890-B470-FBDE4744A118}.Release|Any CPU.Build.0 = Release|Any CPU
 		{06DE17C5-E249-4913-A5AC-FFD57643918D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{06DE17C5-E249-4913-A5AC-FFD57643918D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06DE17C5-E249-4913-A5AC-FFD57643918D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,10 +37,6 @@ Global
 		{3EB229C5-91BF-4C48-AED5-089D303C6DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EB229C5-91BF-4C48-AED5-089D303C6DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EB229C5-91BF-4C48-AED5-089D303C6DEC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4EC7D3B6-0E58-47EA-8DA7-8F3016ED1FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4EC7D3B6-0E58-47EA-8DA7-8F3016ED1FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4EC7D3B6-0E58-47EA-8DA7-8F3016ED1FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4EC7D3B6-0E58-47EA-8DA7-8F3016ED1FAD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1C05D89F-9E92-48E0-92B1-F3374063CBA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1C05D89F-9E92-48E0-92B1-F3374063CBA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C05D89F-9E92-48E0-92B1-F3374063CBA7}.Release|Any CPU.ActiveCfg = Release|Any CPU

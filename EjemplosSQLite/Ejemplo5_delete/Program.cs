@@ -1,11 +1,12 @@
-﻿using ModelClassLibrary.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
+using System.Data.SqlClient;
+using System.Data.SQLite;
+using ModelClassLibrary.Models;
+using System.Data;
 
 namespace Ejemplo5_delete
 {
@@ -13,39 +14,31 @@ namespace Ejemplo5_delete
     {
         static void Main(string[] args)
         {
-            List<Producto> productos = new List<Producto> { new Producto { ID = 1, Nombre = "tomate" }, new Producto { ID = 1, Nombre = "tomate" } };
+            List<Producto> productos = new List<Producto> { new Producto { ID = 1, Nombre = "tomate" }, new Producto { ID = 2, Nombre = "tomate" } };
 
-            #region parámetros
-            string servidor = "TSP\\SQLEXPRESS";
-            string baseDatos = "envios";
-            #endregion
+            string cadenaConexion = "Data Source=../../../mydatabase.db;Version=3;";
 
-            // Cadena de conexión para SQL Server con autenticación de Windows
-            string cadenaConexion = $"Data Source={servidor};Initial Catalog={baseDatos};Integrated Security=True;";
-
-            SqlConnection conn = new SqlConnection(cadenaConexion);
-            SqlCommand command = null;
+            SQLiteConnection conn = null;
             try
             {
+                conn = new SQLiteConnection(cadenaConexion);
                 conn.Open();
 
                 Int32 rowsaffected = 0;
                 foreach (Producto producto in productos)
                 {
-                    string sql = "delete from productos set where id=@id";
+                    string sql = "delete from productos ";// where id=@id";
 
-                    command = new SqlCommand(sql, conn);
+                    using (var query = new SQLiteCommand(sql, conn))
+                    {
+                        query.Parameters.AddWithValue("@id", producto.ID);
+                        query.Parameters.AddWithValue("@nombre", producto.Nombre);
 
-                    command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
-                    command.Parameters["@nombre"].Value = producto.Nombre;
-
-                    command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
-                    command.Parameters["@id"].Value = producto.ID;
-
-                    rowsaffected += command.ExecuteNonQuery();
+                        rowsaffected += query.ExecuteNonQuery();
+                    }
                 }
 
-                Console.WriteLine($"Cantidad de líneas insertadas: {rowsaffected}");
+                Console.WriteLine($"Cantidad de filas borradas: {rowsaffected}");
             }
             catch (Exception e)
             {

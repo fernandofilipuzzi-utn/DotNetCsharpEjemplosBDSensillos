@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
-using System.Data.SqlClient;
-using System.Data.SQLite;
-
-namespace Ejemplo1_select
+namespace Ejemplo1_dll
 {
     class Program
     {
@@ -21,7 +19,7 @@ namespace Ejemplo1_select
                 conn = new SQLiteConnection(connectionString);
                 conn.Open();
 
-                string sql = "CREATE TABLE IF NOT EXISTS productos (id int unique, nombre TEXT)";
+                string sql = "CREATE TABLE IF NOT EXISTS productos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT)";
                 using (var query = new SQLiteCommand(sql, conn))
                 {
                     query.ExecuteNonQuery();

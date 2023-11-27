@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
-using System.Data.SqlClient;
-using System.Data.SQLite;
 using ModelClassLibrary.Models;
 
-namespace Ejemplo3_insert
+namespace Ejemplo2_select
 {
     class Program
     {
@@ -35,7 +34,7 @@ namespace Ejemplo3_insert
                         #region ID
                         int id = 0;
                         if (dataReader[0] != DBNull.Value)
-                            id = (int)dataReader[0];
+                            id = Convert.ToInt32(dataReader[0]);
                         #endregion
 
                         #region nombre

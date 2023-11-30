@@ -24,22 +24,23 @@ namespace Ejemplo5_delete
             string cadenaConexion = $"Data Source={servidor};Initial Catalog={baseDatos};Integrated Security=True;";
 
             SqlConnection conn = new SqlConnection(cadenaConexion);
-            SqlCommand command = null;
             try
             {
                 conn.Open();
 
+                string sql = "delete from productos where id=@id";
+
                 Int32 rowsaffected = 0;
                 foreach (Producto producto in productos)
                 {
-                    string sql = "delete from productos where id=@id";
+                    using (var command = new SqlCommand(sql, conn))
+                    {
 
-                    command = new SqlCommand(sql, conn);
+                        command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                        command.Parameters["@id"].Value = producto.ID;
 
-                    command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
-                    command.Parameters["@id"].Value = producto.ID;
-
-                    rowsaffected += command.ExecuteNonQuery();
+                        rowsaffected += command.ExecuteNonQuery();
+                    }
                 }
 
                 Console.WriteLine($"Cantidad de líneas borradas: {rowsaffected}");

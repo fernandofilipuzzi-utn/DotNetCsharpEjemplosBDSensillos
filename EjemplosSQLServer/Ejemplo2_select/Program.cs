@@ -19,31 +19,33 @@ namespace Ejemplo2_select
             // Cadena de conexión para SQL Server con autenticación de Windows
             string cadenaConexion = $"Data Source={servidor};Initial Catalog={baseDatos};Integrated Security=True;";
 
-            SqlConnection conn = new SqlConnection(cadenaConexion);
-            SqlCommand command = null;
+            SqlConnection conn = null;
             try
             {
+                conn = new SqlConnection(cadenaConexion);
                 conn.Open();
 
-                string sql = "select id, nombre from productos ";
+                string sql = "select id, nombre from productos order by id asc";
 
-                command = new SqlCommand(sql, conn);
-                SqlDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read())
+                using (var command = new SqlCommand(sql, conn))
                 {
-                    #region ID
-                    int id = 0;
-                    if (dataReader[0] != DBNull.Value)
-                        id = (int)dataReader[0];
-                    #endregion
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        #region ID
+                        int id = 0;
+                        if (dataReader[0] != DBNull.Value)
+                            id = (int)dataReader[0];
+                        #endregion
 
-                    #region nombre
-                    string nombre = "";
-                    if (dataReader[1] != DBNull.Value)
-                        nombre = dataReader[1] as string;
-                    #endregion
+                        #region nombre
+                        string nombre = "";
+                        if (dataReader[1] != DBNull.Value)
+                            nombre = dataReader[1] as string;
+                        #endregion
 
-                    Console.WriteLine($"\t\t{id,10} | {nombre,20} ");
+                        Console.WriteLine($"\t\t{id,10} | {nombre,20} ");
+                    }
                 }
             }
             catch (Exception e)

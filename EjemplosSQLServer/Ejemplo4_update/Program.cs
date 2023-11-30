@@ -13,7 +13,8 @@ namespace Ejemplo3_update
     {
         static void Main(string[] args)
         {
-            List<Producto> productos = new List<Producto> { new Producto { ID = 1, Nombre = "tomate" }, new Producto { ID = 1, Nombre = "tomate" } };
+            List<Producto> productos = new List<Producto> { new Producto { ID = 1, Nombre = "tomate" }, 
+                                                            new Producto { ID = 2, Nombre = "tomate" } };
 
             #region parámetros
             string servidor = "TSP\\SQLEXPRESS";
@@ -24,25 +25,25 @@ namespace Ejemplo3_update
             string cadenaConexion = $"Data Source={servidor};Initial Catalog={baseDatos};Integrated Security=True;";
 
             SqlConnection conn = new SqlConnection(cadenaConexion);
-            SqlCommand command = null;
             try
             {
                 conn.Open();
 
+                string sql = "update productos set nombre=@nombre where id=@id";
+
                 Int32 rowsaffected = 0;
                 foreach (Producto producto in productos)
                 {
-                    string sql = "update productos set nombre=@nombre where id=@id";
+                    using (var command = new SqlCommand(sql, conn))
+                    {
+                        command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
+                        command.Parameters["@nombre"].Value = producto.Nombre;
 
-                    command = new SqlCommand(sql, conn);
+                        command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                        command.Parameters["@id"].Value = producto.ID;
 
-                    command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
-                    command.Parameters["@nombre"].Value = producto.Nombre;
-
-                    command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
-                    command.Parameters["@id"].Value = producto.ID;
-
-                    rowsaffected += command.ExecuteNonQuery();
+                        rowsaffected += command.ExecuteNonQuery();
+                    }
                 }
 
                 Console.WriteLine($"Cantidad de líneas actualizadas: {rowsaffected}");

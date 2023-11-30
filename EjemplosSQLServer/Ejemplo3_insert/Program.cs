@@ -27,20 +27,21 @@ namespace Ejemplo2_insert
             string cadenaConexion = $"Data Source={servidor};Initial Catalog={baseDatos};Integrated Security=True;";
 
             SqlConnection conn = new SqlConnection(cadenaConexion);
-            SqlCommand command = null;
             try
             { 
                 conn.Open();
 
+                string sql = "insert into productos (nombre) values (@nombre) ";
+
                 Int32 rowsaffected = 0;
                 foreach (Producto producto in productos)
                 {
-                    string sql = "insert into productos (nombre) values (@nombre) ";
-
-                    command = new SqlCommand(sql, conn);
-                    command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
-                    command.Parameters[0].Value = producto.Nombre;
-                    rowsaffected += command.ExecuteNonQuery();
+                    using (var command = new SqlCommand(sql, conn))
+                    {
+                        command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
+                        command.Parameters[0].Value = producto.Nombre;
+                        rowsaffected += command.ExecuteNonQuery();
+                    }
                 }
 
                 Console.WriteLine($"Cantidad de líneas insertadas: {rowsaffected}");

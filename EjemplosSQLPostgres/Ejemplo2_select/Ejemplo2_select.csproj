@@ -104,7 +104,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="sql\sql.txt" />
+    <Content Include="sql\select.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

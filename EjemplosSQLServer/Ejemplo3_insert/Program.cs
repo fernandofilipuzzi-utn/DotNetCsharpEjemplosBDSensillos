@@ -36,11 +36,11 @@ namespace Ejemplo2_insert
                 Int32 rowsaffected = 0;
                 foreach (Producto producto in productos)
                 {
-                    using (var command = new SqlCommand(sql, conn))
+                    using (var query = new SqlCommand(sql, conn))
                     {
-                        command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
-                        command.Parameters[0].Value = producto.Nombre;
-                        rowsaffected += command.ExecuteNonQuery();
+                        query.Parameters.Add(new SqlParameter("@nombre", SqlDbType.VarChar));
+                        query.Parameters[0].Value = producto.Nombre;
+                        rowsaffected += query.ExecuteNonQuery();
                     }
                 }
 

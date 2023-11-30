@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{51F82D33-D571-49A5-B506-58D2F3B3A3A8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EjemploABM</RootNamespace>
+    <AssemblyName>EjemploABM</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormControlLotes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormControlLotes.Designer.cs">
+      <DependentUpon>FormControlLotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEdicionProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEdicionProducto.Designer.cs">
+      <DependentUpon>FormEdicionProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEdicionLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEdicionLote.Designer.cs">
+      <DependentUpon>FormEdicionLote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPrincipal.Designer.cs">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormControlLotes.resx">
+      <DependentUpon>FormControlLotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEdicionLote.resx">
+      <DependentUpon>FormEdicionLote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEdicionProducto.resx">
+      <DependentUpon>FormEdicionProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPrincipal.resx">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="iconos\add.jpg" />
+    <Content Include="iconos\del.jpg" />
+    <Content Include="iconos\edit.jpg" />
+    <Content Include="iconos\print.jpg" />
+    <Content Include="iconos\search.jpg" />
+    <Content Include="iconos\solo_lectura.jpg" />
+    <Content Include="imagenes\monitor.jpg" />
+    <Content Include="imagenes\mouse.jpg" />
+    <None Include="app.config" />
+    <None Include="Resources\solo_lectura.jpg" />
+    <None Include="Resources\search.jpg" />
+    <None Include="Resources\print.jpg" />
+    <None Include="Resources\edit.jpg" />
+    <None Include="Resources\del.jpg" />
+    <None Include="Resources\add.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModelsLibClass\ModelsLibClass.csproj">
+      <Project>{a8477dc4-c6c4-4e9d-b05c-8ad472093c49}</Project>
+      <Name>ModelsLibClass</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

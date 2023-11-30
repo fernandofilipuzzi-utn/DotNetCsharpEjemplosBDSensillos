@@ -1,0 +1,8 @@
+﻿
+
+
+
+
+
+
+select * from productos ordery by Id asc

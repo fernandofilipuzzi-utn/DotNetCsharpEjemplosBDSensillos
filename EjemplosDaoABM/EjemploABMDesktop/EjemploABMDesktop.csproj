@@ -123,6 +123,10 @@
     <None Include="Resources\add.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DaoImplSqlServer\DaoImplSqlServer.csproj">
+      <Project>{003A6878-7E31-44B6-9ABE-5707E63EE745}</Project>
+      <Name>DaoImplSqlServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModelsLibClass\ModelsLibClass.csproj">
       <Project>{a8477dc4-c6c4-4e9d-b05c-8ad472093c49}</Project>
       <Name>ModelsLibClass</Name>

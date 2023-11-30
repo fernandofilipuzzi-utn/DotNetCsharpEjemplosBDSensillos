@@ -9,8 +9,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Drawing;
 using System.Data.SqlClient;
 using System.Data;
+using ModelsLibClass.Models;
 
-namespace ModelsLibClass.Models
+namespace DaoImplSqlServer.SqlServerImpldao
 {
     public class GestionEnviosSQLServerImplDao : IGestionEnviosDao
     {

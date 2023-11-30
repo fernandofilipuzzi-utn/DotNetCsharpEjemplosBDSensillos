@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using ModelsLibClass.Models;
+using DaoImplSqlServer.SqlServerImpldao;
 
 namespace EjemploABM
 {
@@ -28,7 +29,7 @@ namespace EjemploABM
 
         }
 
-        //control de lotes
+        #region control de lotes
 
         private void controlDeLotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -63,8 +64,9 @@ namespace EjemploABM
                 formControlLotes.Dispose();
             }
         }
+        #endregion
 
-        //edicion de lotes
+        #region edicion de lotes
         private void altaDeProductosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             formControlLotes.Selected = null;
@@ -152,9 +154,9 @@ namespace EjemploABM
                 formControlLotes.ActualizarVista(gestionEnvios.ListarLotes());
         }
 
-       
+        #endregion
 
-        //edición de productos.
+        #region edición de productos.
 
         private void formControlLotes_agregarProductos_Click(object sender, EventArgs e)
         {
@@ -194,9 +196,9 @@ namespace EjemploABM
         {
             Close();
         }
+        #endregion
 
-
-        //impresión de lotes
+        #region impresión de lotes
 
         private void imprimir_Click(object sender, EventArgs e)
         {
@@ -319,5 +321,7 @@ namespace EjemploABM
             if (linea < lineasAImprimir)
                 e.HasMorePages = true;  
         }
+
+        #endregion
     }
 }

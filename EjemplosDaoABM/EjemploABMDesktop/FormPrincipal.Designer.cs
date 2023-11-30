@@ -46,7 +46,8 @@
             this.lotesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(320, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(427, 27);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -54,14 +55,15 @@
             // 
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cerrarToolStripMenuItem});
+            this.archivoToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(67, 23);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // cerrarToolStripMenuItem
             // 
             this.cerrarToolStripMenuItem.Name = "cerrarToolStripMenuItem";
-            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.cerrarToolStripMenuItem.Text = "Cerrar";
             this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
@@ -70,21 +72,22 @@
             this.lotesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.controlDeLotesToolStripMenuItem,
             this.altaDeProductosToolStripMenuItem});
+            this.lotesToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lotesToolStripMenuItem.Name = "lotesToolStripMenuItem";
-            this.lotesToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.lotesToolStripMenuItem.Size = new System.Drawing.Size(54, 23);
             this.lotesToolStripMenuItem.Text = "Lotes";
             // 
             // controlDeLotesToolStripMenuItem
             // 
             this.controlDeLotesToolStripMenuItem.Name = "controlDeLotesToolStripMenuItem";
-            this.controlDeLotesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.controlDeLotesToolStripMenuItem.Size = new System.Drawing.Size(187, 24);
             this.controlDeLotesToolStripMenuItem.Text = "Control de lotes";
             this.controlDeLotesToolStripMenuItem.Click += new System.EventHandler(this.controlDeLotesToolStripMenuItem_Click);
             // 
             // altaDeProductosToolStripMenuItem
             // 
             this.altaDeProductosToolStripMenuItem.Name = "altaDeProductosToolStripMenuItem";
-            this.altaDeProductosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.altaDeProductosToolStripMenuItem.Size = new System.Drawing.Size(187, 24);
             this.altaDeProductosToolStripMenuItem.Text = "Alta de Productos";
             this.altaDeProductosToolStripMenuItem.Click += new System.EventHandler(this.formControlLotes_agregarProductos_Click);
             // 
@@ -94,11 +97,13 @@
             // 
             // FormPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 141);
+            this.ClientSize = new System.Drawing.Size(427, 174);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Aplicación de control de Envios";

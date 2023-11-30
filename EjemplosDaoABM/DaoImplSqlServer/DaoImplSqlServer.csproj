@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A8477DC4-C6C4-4E9D-B05C-8AD472093C49}</ProjectGuid>
+    <ProjectGuid>{003A6878-7E31-44B6-9ABE-5707E63EE745}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ModelsLibClass</RootNamespace>
-    <AssemblyName>ModelsLibClass</AssemblyName>
+    <RootNamespace>DaoImplSqlServer</RootNamespace>
+    <AssemblyName>DaoImplSqlServer</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,16 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dao\IGestionEnviosDao.cs" />
-    <Compile Include="Models\Lote.cs" />
-    <Compile Include="Models\Producto.cs" />
+    <Compile Include="SqlServerImpldao\GestionEnviosSQLServerImplDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="uml\controlLotesEnvios.uml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="sql\ddl.sql" />
+    <ProjectReference Include="..\ModelsLibClass\ModelsLibClass.csproj">
+      <Project>{a8477dc4-c6c4-4e9d-b05c-8ad472093c49}</Project>
+      <Name>ModelsLibClass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

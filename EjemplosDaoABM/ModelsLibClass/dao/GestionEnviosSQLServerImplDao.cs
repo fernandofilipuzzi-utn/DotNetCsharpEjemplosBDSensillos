@@ -83,19 +83,17 @@ namespace ModelsLibClass.Models
                     {
                         #region  id
                         int id = 0;
-                        if (dataReader[0] != null)
-                            id = (int)dataReader[0];
+                        if (dataReader["id"] != null) id = Convert.ToInt32(dataReader["id"]);
                         #endregion
 
                         #region  nombre
                         string nombre = "";
-                        if (dataReader[1] != null)
-                            nombre = (string)dataReader[1];
+                        if (dataReader["nombre"] != null) nombre = (string)dataReader["nombre"];
                         #endregion
 
                         #region imagen
                         Image imagen = null;
-                        byte[] imagenByte = dataReader[2] as byte[];
+                        byte[] imagenByte = dataReader["imagen"] as byte[];
                         if (imagenByte != null)
                         {
                             using (MemoryStream imageStream = new System.IO.MemoryStream(imagenByte))
@@ -136,7 +134,6 @@ namespace ModelsLibClass.Models
                                    " from productos as p " +
                                    " where p.nombre like @Nombre ";
 
-
                 using (var query = new SqlCommand(sql, conn))
                 {
                     query.Parameters.Add(new SqlParameter("Nombre", SqlDbType.VarChar));
@@ -146,15 +143,15 @@ namespace ModelsLibClass.Models
 
                     while (dataReader.Read())
                     {
-                        //id
+                        #region id
                         int id = 0;
-                        if (dataReader[0] != null)
-                            id = (int)dataReader[0];
+                        if (dataReader["id"] != null) id = Convert.ToInt32(dataReader["id"]);
+                        #endregion
 
-                        //nombre
+                        #region nombre
                         string nombre = "";
-                        if (dataReader[1] != null)
-                            nombre = (string)dataReader[1];
+                        if (dataReader["nombre"] != null) nombre = (string)dataReader["nombre"];
+                        #endregion
 
                         productos.Add(new Producto(id, nombre));
                     }
@@ -193,20 +190,20 @@ namespace ModelsLibClass.Models
 
                     while (dataReader.Read() == true)
                     {
-                        //id
+                        #region id
                         int id = 0;
-                        if (dataReader[0] != null)
-                            id = (int)dataReader[0];
+                        if (dataReader["id"] != null) id = (int)dataReader["id"];
+                        #endregion
 
-                        //numero
+                        #region numero
                         int numero = 1;
-                        if (dataReader[1] != DBNull.Value)
-                            numero = (int)dataReader[1];
+                        if (dataReader["numero"] != DBNull.Value) numero = (int)dataReader["numero"];
+                        #endregion
 
-                        //fecha
+                        #region fecha
                         DateTime fecha = new DateTime();
-                        if (dataReader[2] != DBNull.Value)
-                            fecha = (DateTime)dataReader[2];
+                        if (dataReader["fechaproduccion"] != DBNull.Value) fecha = (DateTime)dataReader["fechaproduccion"];
+                        #endregion
 
                         Lote buscado = new Lote(id, numero, fecha);
                         lotes.Add(buscado);
@@ -289,9 +286,9 @@ namespace ModelsLibClass.Models
                 conn = new SqlConnection(cadenaConexion);
                 conn.Open();
 
-                string sql = " update lotes set numero=:NumeroLote," +
-                                  " fechaproduccion=:FechaProduccion " +
-                                   " where id=:@IdLote";
+                string sql = " update lotes set numero=@NumeroLote," +
+                             " fechaproduccion=@FechaProduccion " +
+                             " where id=@IdLote";
                 
                 Int32 rowsaffected = 0;
                 using (var query = new SqlCommand(sql, conn))
@@ -305,8 +302,7 @@ namespace ModelsLibClass.Models
 
                     Int32 id = (int)query.ExecuteNonQuery();
 
-                    //quitando  los lotes eliminados 
-
+                    #region quitando  los lotes eliminados 
                     //busco la lista de lotes en la bd
                     List<Producto> quitarProductosDeLotes = new List<Producto>();
                     foreach (Producto p1 in ListarProductosPorLote(lote.ID))
@@ -328,13 +324,14 @@ namespace ModelsLibClass.Models
                     {
                         QuitarProductoDeLote(p, lote);
                     }
+                    #endregion
 
-                    //y agregando los nuevos vinculos entre producto y lotes
+                    #region y agregando los nuevos vinculos entre producto y lotes
                     List<Producto> vincularProductosALote = new List<Producto>();
-
                     foreach (Producto p2 in lote.Productos)
                     {
                         Producto buscado = null;
+                        #region busco si existe
                         int n = 0;
                         List<Producto> productosPorlote = ListarProductosPorLote(lote.ID);
                         while (n < productosPorlote.Count && buscado == null)
@@ -345,13 +342,15 @@ namespace ModelsLibClass.Models
                             }
                             n++;
                         }
-                        if (buscado != null)
-                            vincularProductosALote.Add(buscado);
+                        #endregion
+                        if (buscado == null)
+                            vincularProductosALote.Add(p2);
                     }
                     foreach (Producto p in vincularProductosALote)
                     {
                         AgregarProductoALote(p, lote);
                     }
+                    #endregion
                 }
             }
             catch (Exception e)
@@ -375,7 +374,7 @@ namespace ModelsLibClass.Models
                 conn.Open();
 
                 string sql = " delete from lotes; " +
-                                   " delete from lotes_productos;";
+                             " delete from lotes_productos;";
 
                 Int32 rowsaffected = 0;
                 using (var query = new SqlCommand(sql, conn))
@@ -405,7 +404,7 @@ namespace ModelsLibClass.Models
                 conn.Open();
 
                 string sql = " insert into lotes_productos (idlote, idproducto) " +
-                                   " values (@IdLote, @IdProducto)";
+                             " values (@IdLote, @IdProducto)";
 
                 Int32 rowsaffected = 0;
                 using (var query = new SqlCommand(sql, conn))
@@ -439,7 +438,7 @@ namespace ModelsLibClass.Models
                 conn.Open();
 
                 string sql = " delete from lotes_productos " +
-                                  " where idlote=:IdLote and idProducto=:IdProducto";
+                             " where idlote=@IdLote and idProducto=@IdProducto";
 
                 Int32 rowsaffected = 0;
                 using (var query = new SqlCommand(sql, conn))
@@ -473,16 +472,15 @@ namespace ModelsLibClass.Models
                 conn.Open();
 
                 string sql = " select lot.id, lot.numero, lot.fechaproduccion " +
-                                   " from lotes as lot " +
-                                   " where lot.numero = :NroLote";
+                              " from lotes as lot " +
+                              " where lot.numero = @NroLote";
 
                 Int32 rowsaffected = 0;
                 using (var query = new SqlCommand(sql, conn))
                 {
 
-                    query.Parameters.Add(new SqlParameter("NroLote",
-                                                 SqlDbType.Int));
-                    query.Parameters[0].Value = numeroLote;
+                    query.Parameters.Add(new SqlParameter("NroLote", SqlDbType.Int));
+                    query.Parameters["NroLote"].Value = numeroLote;
 
                     SqlDataReader dataReader = query.ExecuteReader();
 
@@ -535,17 +533,14 @@ namespace ModelsLibClass.Models
 
                 string sql = " select lot.id, lot.numero, lot.fechaproduccion " +
                                    " from lotes as lot " +
-                                   " where lot.id=:IdLote " +
+                                   " where lot.id=@IdLote " +
                                    " order by lot.numero asc ";
 
                 Int32 rowsaffected = 0;
                 using (var query = new SqlCommand(sql, conn))
                 {
-
-                    query.Parameters.Add(new SqlParameter("IdLote",
-                                      SqlDbType.Int));
-
-                    query.Parameters[0].Value = ID;
+                    query.Parameters.Add(new SqlParameter("IdLote", SqlDbType.Int));
+                    query.Parameters["IdLote"].Value = ID;
 
                     SqlDataReader dataReader = query.ExecuteReader();
                     while (dataReader.Read())
@@ -651,6 +646,5 @@ namespace ModelsLibClass.Models
 
             return productos;
         }
-
     }
 }

@@ -33,6 +33,14 @@ Luego hay que correr el ejemplo 1 para crear el esquema. Hay que ajustar la cade
 <details open>
 <summary>Aquí se pone en práctica la idea del patrón DAO</summary>
 
+Es una par de pantallas muy simples que sirven para disparar consultas a la base de datos y mostrar los datos.
+
+#### Configuración de  la base
+
+<div align="center">
+        <img style="width:60%;" src="EjemplosDaoABM/EjemploABMDesktop/docs/pantallazo.jpg"/>
+        <p>Figura 2. </p>
+</div>
 
 #### Configuración de  la base
 Requiere la creación de la base de datos. Es la misma que se necesitó para los ejemplos anteriores.

@@ -52,9 +52,7 @@ Al crear un lote, para agregar un producto al lote como se muestra en la Figura 
 #### Configuración de  la base
 Requiere la creación de la base de datos. Es la misma que se necesitó para los ejemplos anteriores.
 
-Luego hay que configurar la aplicación según la base de datos elegida. 
-
-La configuración se realiza sobre el fichero <a href="EjemplosDaoABM/EjemploABMDesktop/app.config">EjemploABMDesktop/app.config</a> (ajustar con los parámetros propios del entorno a correr)
+Luego hay que configurar la aplicación según la base de datos elegida y los parámetros propios de la configuración de la base o el entorno donde esté corriendo. Para esto hay que modificar el fichero <a href="EjemplosDaoABM/EjemploABMDesktop/app.config">EjemploABMDesktop/app.config</a> (ajustar con los parámetros propios del entorno a correr)
 
 <details open>
 <summary>Para SqlServer configurar con lo siguiente:</summary>

@@ -107,7 +107,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="docs\pantallazo.jpg" />
+    <Content Include="docs\pantallazo2.jpg" />
+    <Content Include="docs\pantallazo1.jpg" />
     <Content Include="iconos\add.jpg" />
     <Content Include="iconos\del.jpg" />
     <Content Include="iconos\edit.jpg" />

@@ -55,24 +55,20 @@ La configuración se realiza sobre el fichero <a href="EjemplosDaoABM/EjemploABM
 ```xml
 <?xml version="1.0"?>
 <configuration>
-	<configSections>
+  <configSections>
      <section name="DatabaseProviderSqlServer" type="System.Configuration.NameValueSectionHandler" />
-	</configSections>
+  </configSections>
 	
-	<startup>
-		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8"/>
-	</startup>
-
-	<appSettings>
+  <appSettings>
     <add key="DaoImplLib" value="DaoImplSqlServer" />
-		<add key="DaoImplClass" value="DaoImplSqlServer.SqlServerImplDao.GestionEnviosSQLServerImplDao" />
-	</appSettings>
+    <add key="DaoImplClass" value="DaoImplSqlServer.SqlServerImplDao.GestionEnviosSQLServerImplDao" />
+</appSettings>
 
-	<DatabaseProviderSqlServer>
-		<add key="Host" value="TSP\SQLEXPRESS" />
-		<add key="Port" value="1433" />
-		<add key="BaseDatosNombre" value="envios" />
-	</DatabaseProviderSqlServer>
+  <DatabaseProviderSqlServer>
+     <add key="Host" value="TSP\SQLEXPRESS" />
+     <add key="Port" value="1433" />
+    <add key="BaseDatosNombre" value="envios" />
+  </DatabaseProviderSqlServer>
 
 </configuration>       
 ```
@@ -85,26 +81,22 @@ La configuración se realiza sobre el fichero <a href="EjemplosDaoABM/EjemploABM
 ```xml
 <?xml version="1.0"?>
 <configuration>
-	<configSections>
-     <section name="DatabaseProviderPostgreSql" type="System.Configuration.NameValueSectionHandler" />
-	</configSections>
-	
-	<startup>
-		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8"/>
-	</startup>
+  <configSections>
+    <section name="DatabaseProviderPostgreSql" type="System.Configuration.NameValueSectionHandler" />
+  </configSections>
 
-	<appSettings>
-		<add key="DaoImplLib" value="DaoImplPostgreSql" />
-		<add key="DaoImplClass" value="DaoImplPostgreSql.PostgreSqlImplDao.GestionEnviosPostgreSqlImplDao" />
-	</appSettings>
+  <appSettings>
+    <add key="DaoImplLib" value="DaoImplPostgreSql" />
+    <add key="DaoImplClass" value="DaoImplPostgreSql.PostgreSqlImplDao.GestionEnviosPostgreSqlImplDao" />
+  </appSettings>
 
-	<DatabaseProviderPostgreSql>
-		<add key="Host" value="localhost" />
-		<add key="Port" value="5432" />
-		<add key="username" value="postgres" />
-		<add key="password" value="postgres" />
-		<add key="BaseDatosNombre" value="envios" />
-	</DatabaseProviderPostgreSql>
+  <DatabaseProviderPostgreSql>
+    <add key="Host" value="localhost" />
+    <add key="Port" value="5432" />
+    <add key="username" value="postgres" />
+    <add key="password" value="postgres" />
+    <add key="BaseDatosNombre" value="envios" />
+  </DatabaseProviderPostgreSql>
 
 </configuration>       
 ```

@@ -47,7 +47,7 @@ Requiere la creación de la base de datos. Es la misma que se necesitó para los
 
 Luego hay que configurar la aplicación según la base de datos elegida. 
 
-La configuración se realiza sobre el fichero <b>EjemploABMDesktop/app.config</b> (ajustar con los parámetros propios del entorno a correr)
+La configuración se realiza sobre el fichero <a href="EjemplosDaoABM/EjemploABMDesktop/app.config">EjemploABMDesktop/app.config</a> (ajustar con los parámetros propios del entorno a correr)
 
 <details open>
 <summary>Para SqlServer configurar con lo siguiente:</summary>

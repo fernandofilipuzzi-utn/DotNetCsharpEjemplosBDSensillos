@@ -10,21 +10,32 @@ using System.Drawing;
 using System.Data.SqlClient;
 using System.Data;
 using ModelsLibClass.Models;
+using DaoImplSqlServer.Utils;
 
 namespace DaoImplSqlServer.SqlServerImpldao
 {
     public class GestionEnviosSQLServerImplDao : IGestionEnviosDao
     {
+        /*
         #region parámetros
         static string servidor = "TSP\\SQLEXPRESS";
         static string baseDatos = "envios";
         #endregion
+        */
 
-        static string cadenaConexion;
+        //static string cadenaConexion;
+
+        private SqlConnection Connection
+        {
+            get {
+                //new SqlConnection(cadenaConexion);
+                return DatabaseProviderSqlServer.GetConexion();
+            }
+        }
 
         static GestionEnviosSQLServerImplDao()
         {
-            cadenaConexion=$"Data Source={servidor};Initial Catalog={baseDatos};Integrated Security=True;";
+            //cadenaConexion=$"Data Source={servidor};Initial Catalog={baseDatos};Integrated Security=True;";
         }
 
         public void AgregarNuevoProducto(Producto nuevoProducto)
@@ -32,7 +43,7 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection;
                 conn.Open();
 
                 string sql = "insert into productos (nombre, imagen) values (@nombre, @imagen) ";
@@ -70,7 +81,9 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn= this.Connection; 
+
                 conn.Open();
 
                 string sql = "select p.id, p.nombre, p.imagen " +
@@ -128,7 +141,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection;
                 conn.Open();
 
                 string sql = " select p.id, p.nombre " +
@@ -177,7 +191,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection;
                 conn.Open();
 
                 string sql = "select id, numero, fechaproduccion " +
@@ -234,7 +249,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
                 SqlConnection conn = null;
                 try
                 {
-                    conn = new SqlConnection(cadenaConexion);
+                    //conn = new SqlConnection(cadenaConexion);
+                    conn = this.Connection;
                     conn.Open();
 
                     string sql = "insert into lotes (numero, fechaproduccion) " +
@@ -284,7 +300,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection;
                 conn.Open();
 
                 string sql = " update lotes set numero=@NumeroLote," +
@@ -371,7 +388,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection;
                 conn.Open();
 
                 string sql = " delete from lotes; " +
@@ -401,7 +419,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection;
                 conn.Open();
 
                 string sql = " insert into lotes_productos (idlote, idproducto) " +
@@ -435,7 +454,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection; ;
                 conn.Open();
 
                 string sql = " delete from lotes_productos " +
@@ -469,7 +489,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection;
                 conn.Open();
 
                 string sql = " select lot.id, lot.numero, lot.fechaproduccion " +
@@ -529,7 +550,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection; ;
                 conn.Open();
 
                 string sql = " select lot.id, lot.numero, lot.fechaproduccion " +
@@ -587,7 +609,8 @@ namespace DaoImplSqlServer.SqlServerImpldao
             SqlConnection conn = null;
             try
             {
-                conn = new SqlConnection(cadenaConexion);
+                //conn = new SqlConnection(cadenaConexion);
+                conn = this.Connection;
                 conn.Open();
 
                 string sql = " select p.id, p.nombre, p.imagen " +

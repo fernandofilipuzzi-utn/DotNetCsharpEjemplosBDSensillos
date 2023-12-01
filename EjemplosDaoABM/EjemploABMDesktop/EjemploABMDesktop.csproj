@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -123,6 +124,10 @@
     <None Include="Resources\add.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DaoImplPostgresql\DaoImplPostgreSql.csproj">
+      <Project>{4fc30c68-7622-40e7-9bbb-2ecd0eea4aef}</Project>
+      <Name>DaoImplPostgreSql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DaoImplSqlServer\DaoImplSqlServer.csproj">
       <Project>{003A6878-7E31-44B6-9ABE-5707E63EE745}</Project>
       <Name>DaoImplSqlServer</Name>

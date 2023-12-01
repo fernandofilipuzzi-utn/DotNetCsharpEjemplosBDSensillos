@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelsLibClass", "ModelsLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaoImplSqlServer", "DaoImplSqlServer\DaoImplSqlServer.csproj", "{003A6878-7E31-44B6-9ABE-5707E63EE745}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaoImplPostgresql", "DaoImplPostgresql\DaoImplPostgresql.csproj", "{4FC30C68-7622-40E7-9BBB-2ECD0EEA4AEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaoImplPostgreSql", "DaoImplPostgresql\DaoImplPostgreSql.csproj", "{4FC30C68-7622-40E7-9BBB-2ECD0EEA4AEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

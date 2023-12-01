@@ -8,13 +8,15 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using ModelsLibClass.Models;
-using DaoImplSqlServer.SqlServerImpldao;
+using DaoImplSqlServer.Utils;
+using ModelsLibClass.Utils;
 
 namespace EjemploABM
 {
     public partial class FormPrincipal : Form
     {
-        IGestionEnviosDao gestionEnvios = new GestionEnviosSQLServerImplDao();
+        //IGestionEnviosDao gestionEnvios = new GestionEnviosSQLServerImplDao();
+        IGestionEnviosDao gestionEnvios = DatabaseProviderDao.GetInstancia();
 
         FormControlLotes formControlLotes = new FormControlLotes();
         FormEdicionLote formEdicionLote = null;
@@ -50,7 +52,7 @@ namespace EjemploABM
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error",ex.Message);
+                MessageBox.Show($"{ex.Message}+{ex.StackTrace.ToString()}", "Error");
             }
             finally
             {
@@ -113,7 +115,8 @@ namespace EjemploABM
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error", ex.Message);
+
+                    MessageBox.Show($"{ex.Message}+{ex.StackTrace.ToString()}", "Error");
                 }
                 finally
                 {

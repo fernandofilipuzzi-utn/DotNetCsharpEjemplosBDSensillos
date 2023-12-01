@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SqlServerImpldao\GestionEnviosSQLServerImplDao.cs" />
+    <Compile Include="SqlServerImplDao\GestionEnviosSQLServerImplDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\DatabaseProviderSqlServer.cs" />
   </ItemGroup>
@@ -52,6 +52,9 @@
       <Project>{a8477dc4-c6c4-4e9d-b05c-8ad472093c49}</Project>
       <Name>ModelsLibClass</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sql\ddl.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

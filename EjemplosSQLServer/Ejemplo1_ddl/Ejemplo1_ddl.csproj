@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="docs\2-nombre_base.jpg" />
+    <Content Include="docs\1-nueva_base.jpg" />
     <Content Include="imagenes\arroz.jpg" />
     <Content Include="imagenes\fideos.jpg" />
     <Content Include="sql\ddl.sql" />

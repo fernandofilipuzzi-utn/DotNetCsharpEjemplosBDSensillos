@@ -38,8 +38,15 @@ Es una par de pantallas muy simples que sirven para disparar consultas a la base
 #### Configuración de  la base
 
 <div align="center">
-        <img style="width:60%;" src="EjemplosDaoABM/EjemploABMDesktop/docs/pantallazo.jpg"/>
-        <p>Figura 2. </p>
+        <img style="width:70%;" src="EjemplosDaoABM/EjemploABMDesktop/docs/pantallazo1.jpg"/>
+        <p>Figura 2. Vista del ejemplo</p>
+</div>
+
+Al crear un lote, para agregar un producto al lote como se muestra en la Figura 3
+
+<div align="center">
+        <img style="width:70%;" src="EjemplosDaoABM/EjemploABMDesktop/docs/pantallazo2.jpg"/>
+        <p>Figura 3. Vista del ejemplo</p>
 </div>
 
 #### Configuración de  la base

@@ -7,14 +7,16 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using System.Drawing;
-using System.Data.SqlClient;
 using System.Data;
 using ModelsLibClass.Models;
-using DaoImplSqlServer.Utils;
 
-namespace DaoImplSqlServer.SqlServerImplDao
+using DaoImplSqlite.Utils;
+using System.Data.SQLite;
+using System.Globalization;
+
+namespace DaoImplSqlite.SqliteImplDao
 {
-    public class GestionEnviosSQLServerImplDao : IGestionEnviosDao
+    public class GestionEnviosSQLiteImplDao : IGestionEnviosDao
     {
         /*
         #region parámetros
@@ -25,22 +27,25 @@ namespace DaoImplSqlServer.SqlServerImplDao
 
         //static string cadenaConexion;
 
-        private SqlConnection Connection
+        private SQLiteConnection Connection
         {
             get {
-                //new SqlConnection(cadenaConexion);
-                return DatabaseProviderSqlServer.GetConexion();
+                //new SQLiteConnection(cadenaConexion);
+                
+                return DatabaseProviderSqlite.GetConexion();
+
             }
         }
 
-        static GestionEnviosSQLServerImplDao()
-        {
-            //cadenaConexion=$"Data Source={servidor};Initial Catalog={baseDatos};Integrated Security=True;";
+        public GestionEnviosSQLiteImplDao(){
+            
         }
+
+        
 
         public void AgregarNuevoProducto(Producto nuevoProducto)
         {
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
                 conn = this.Connection;
@@ -49,10 +54,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
                 string sql = "insert into productos (nombre, imagen) values (@nombre, @imagen) ";
 
                 Int32 rowsaffected = 0;
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
-                    query.Parameters.Add(new SqlParameter("nombre",  SqlDbType.VarChar));
-                    query.Parameters.Add(new SqlParameter("imagen", SqlDbType.Binary));
+                    query.Parameters.Add(new SQLiteParameter("nombre",  DbType.String));
+                    query.Parameters.Add(new SQLiteParameter("imagen", DbType.Binary));
 
                     query.Parameters["nombre"].Value = nuevoProducto.Nombre;
 
@@ -78,10 +83,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Producto> productos = new List<Producto>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn= this.Connection; 
 
                 conn.Open();
@@ -90,7 +95,7 @@ namespace DaoImplSqlServer.SqlServerImplDao
                              " from productos as p " +
                              " order by p.nombre asc  ";
 
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
                     using (var dataReader = query.ExecuteReader())
                     {
@@ -140,10 +145,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Producto> productos = new List<Producto>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn = this.Connection;
                 conn.Open();
 
@@ -151,9 +156,9 @@ namespace DaoImplSqlServer.SqlServerImplDao
                                    " from productos as p " +
                                    " where p.nombre like @Nombre ";
 
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
-                    query.Parameters.Add(new SqlParameter("Nombre", SqlDbType.VarChar));
+                    query.Parameters.Add(new SQLiteParameter("Nombre", DbType.String));
                     query.Parameters["Nombre"].Value = nombreProducto.Trim();
 
                     using (var dataReader = query.ExecuteReader())
@@ -191,10 +196,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Lote> lotes = new List<Lote>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn = this.Connection;
                 conn.Open();
 
@@ -202,7 +207,7 @@ namespace DaoImplSqlServer.SqlServerImplDao
                                   " from lotes " +
                                   " order by id asc";
 
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
 
                     using (var dataReader = query.ExecuteReader())
@@ -211,7 +216,7 @@ namespace DaoImplSqlServer.SqlServerImplDao
                         {
                             #region id
                             int id = 0;
-                            if (dataReader["id"] != null) id = int.Parse(dataReader["id"].ToString());
+                            if (dataReader["id"] != null) id = int.Parse( dataReader["id"].ToString() ) ;
                             #endregion
 
                             #region numero
@@ -250,28 +255,30 @@ namespace DaoImplSqlServer.SqlServerImplDao
             {
                 List<Lote> lotes = new List<Lote>();
 
-                SqlConnection conn = null;
+                SQLiteConnection conn = null;
                 try
                 {
-                    //conn = new SqlConnection(cadenaConexion);
+                    //conn = new SQLiteConnection(cadenaConexion);
                     conn = this.Connection;
                     conn.Open();
 
                     string sql = "insert into lotes (numero, fechaproduccion) " +
-                                         " output INSERTED.id "+
-                                         " values (@NumeroLote, @FechaProduccion) ";
+                                         " values (@NumeroLote, @FechaProduccion);  " +
+                                         "SELECT last_insert_rowid() AS id;";
 
                     using (var transaction = conn.BeginTransaction(IsolationLevel.Serializable))
                     {
-                        using (var query = new SqlCommand(sql, conn, transaction))
+
+                        using (var query = new SQLiteCommand(sql, conn, transaction))
                         {
-                            query.Parameters.Add(new SqlParameter("NumeroLote", SqlDbType.Int));
-                            query.Parameters.Add(new SqlParameter("FechaProduccion", SqlDbType.Date));
+                            query.Parameters.Add(new SQLiteParameter("NumeroLote"));
+                            query.Parameters.Add(new SQLiteParameter("FechaProduccion"));
                             query.Parameters["NumeroLote"].Value = nuevoLote.Numero;
                             query.Parameters["FechaProduccion"].Value = nuevoLote.FechaProduccion;
 
                             //consigue la id generada para vincularla con los productos.
-                            Int32 id = (Int32)query.ExecuteScalar();
+                            //query.ExecuteScalar();
+                            Int32 id = Convert.ToInt32(query.ExecuteScalar());
                             nuevoLote.ID = id;
 
                             foreach (Producto p in nuevoLote.Productos)
@@ -302,10 +309,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Lote> lotes = new List<Lote>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn = this.Connection;
                 conn.Open();
 
@@ -314,11 +321,11 @@ namespace DaoImplSqlServer.SqlServerImplDao
                              " where id=@IdLote";
                 
                 Int32 rowsaffected = 0;
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
-                    query.Parameters.Add(new SqlParameter("NumeroLote", SqlDbType.Int));
-                    query.Parameters.Add(new SqlParameter("FechaProduccion", SqlDbType.Date));
-                    query.Parameters.Add(new SqlParameter("IdLote", SqlDbType.Int));
+                    query.Parameters.Add(new SQLiteParameter("NumeroLote"));
+                    query.Parameters.Add(new SQLiteParameter("FechaProduccion"));
+                    query.Parameters.Add(new SQLiteParameter("IdLote"));
                     query.Parameters["NumeroLote"].Value = lote.Numero;
                     query.Parameters["FechaProduccion"].Value = lote.FechaProduccion;
                     query.Parameters["IdLote"].Value = lote.ID;
@@ -390,10 +397,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Lote> lotes = new List<Lote>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn = this.Connection;
                 conn.Open();
 
@@ -401,7 +408,7 @@ namespace DaoImplSqlServer.SqlServerImplDao
                              " delete from lotes_productos;";
 
                 Int32 rowsaffected = 0;
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
 
                     rowsaffected = query.ExecuteNonQuery();
@@ -421,10 +428,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Lote> lotes = new List<Lote>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn = this.Connection;
                 conn.Open();
 
@@ -432,10 +439,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
                              " values (@IdLote, @IdProducto)";
 
                 Int32 rowsaffected = 0;
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
-                    query.Parameters.Add(new SqlParameter("IdLote",SqlDbType.Int));
-                    query.Parameters.Add(new SqlParameter("IdProducto", SqlDbType.Int));
+                    query.Parameters.Add(new SQLiteParameter("IdLote"));
+                    query.Parameters.Add(new SQLiteParameter("IdProducto"));
                     query.Parameters["IdLote"].Value = lote.ID;
                     query.Parameters["IdProducto"].Value = producto.ID;
 
@@ -456,10 +463,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Lote> lotes = new List<Lote>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn = this.Connection; ;
                 conn.Open();
 
@@ -467,10 +474,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
                              " where idlote=@IdLote and idProducto=@IdProducto";
 
                 Int32 rowsaffected = 0;
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
-                    query.Parameters.Add(new SqlParameter("IdLote", SqlDbType.Int));
-                    query.Parameters.Add(new SqlParameter("IdProducto", SqlDbType.Int));
+                    query.Parameters.Add(new SQLiteParameter("IdLote"));
+                    query.Parameters.Add(new SQLiteParameter("IdProducto"));
                     query.Parameters[0].Value = lote.ID;
                     query.Parameters[1].Value = producto.ID;
 
@@ -491,10 +498,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Lote> lotes = new List<Lote>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn = this.Connection;
                 conn.Open();
 
@@ -503,30 +510,30 @@ namespace DaoImplSqlServer.SqlServerImplDao
                               " where lot.numero = @NroLote";
 
                 Int32 rowsaffected = 0;
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
 
-                    query.Parameters.Add(new SqlParameter("NroLote", SqlDbType.Int));
+                    query.Parameters.Add(new SQLiteParameter("NroLote"));
                     query.Parameters["NroLote"].Value = numeroLote;
 
                     using (var dataReader = query.ExecuteReader())
                     {
                         while (dataReader.Read())
                         {
-                            #region id
+                            //id
                             int id = 0;
-                            if (dataReader["id"] != DBNull.Value) id = int.Parse( dataReader["id"].ToString() );
-                            #endregion
+                            if (dataReader[0] != null)
+                                id = (int)dataReader[0];
 
-                            #region numero
+                            //numero
                             int numero = 1;
-                            if (dataReader["numero"] != DBNull.Value) numero = int.Parse( dataReader["numero"].ToString());
-                            #endregion
+                            if (dataReader[1] != DBNull.Value)
+                                numero = (int)dataReader[1];
 
-                            #region fecha
+                            //fecha
                             DateTime fecha = new DateTime();
-                            if (dataReader["fechaproduccion"] != DBNull.Value) fecha = DateTime.Parse( dataReader["fechaproduccion"].ToString());
-                            #endregion
+                            if (dataReader[2] != DBNull.Value)
+                                fecha = (DateTime)dataReader[2];
 
                             Lote lote = new Lote(id, numero, fecha);
                             lotes.Add(lote);
@@ -553,10 +560,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Lote> lotes = new List<Lote>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn = this.Connection; ;
                 conn.Open();
 
@@ -566,29 +573,26 @@ namespace DaoImplSqlServer.SqlServerImplDao
                                    " order by lot.numero asc ";
 
                 Int32 rowsaffected = 0;
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
-                    query.Parameters.Add(new SqlParameter("IdLote", SqlDbType.Int));
+                    query.Parameters.Add(new SQLiteParameter("IdLote"));
                     query.Parameters["IdLote"].Value = ID;
 
                     using (var dataReader = query.ExecuteReader())
                     {
                         while (dataReader.Read())
                         {
-                            #region id
+                            //id
                             int id = 0;
-                            if (dataReader["id"] != DBNull.Value) id = int.Parse(dataReader["id"].ToString());
-                            #endregion
+                            if (dataReader["id"] != null) id= int.Parse(dataReader["id"].ToString());
 
-                            #region número
+                            //número
                             int numero = 0;
-                            if (dataReader["numero"] != DBNull.Value) numero = int.Parse( dataReader["numero"].ToString());
-                            #endregion
+                            if (dataReader["numero"] != null) numero= int.Parse(dataReader["numero"].ToString());
 
-                            #region fecha
-                            DateTime fecha = DateTime.Now;
-                            if (dataReader["fechaproduccion"] != DBNull.Value) fecha = DateTime.Parse(dataReader["fechaproduccion"].ToString());
-                            #endregion
+                            //fecha
+                            DateTime fecha = DateTime.MinValue;
+                            if (dataReader["fechaproduccion"] != DBNull.Value) fecha= DateTime.Parse(dataReader["fechaproduccion"].ToString());
 
                             Lote buscado = new Lote(id, numero, fecha);
                             lotes.Add(buscado);
@@ -614,10 +618,10 @@ namespace DaoImplSqlServer.SqlServerImplDao
         {
             List<Producto> productos = new List<Producto>();
 
-            SqlConnection conn = null;
+            SQLiteConnection conn = null;
             try
             {
-                //conn = new SqlConnection(cadenaConexion);
+                //conn = new SQLiteConnection(cadenaConexion);
                 conn = this.Connection;
                 conn.Open();
 
@@ -628,29 +632,30 @@ namespace DaoImplSqlServer.SqlServerImplDao
                                    " order by p.nombre asc ";
 
                 Int32 rowsaffected = 0;
-                using (var query = new SqlCommand(sql, conn))
+                using (var query = new SQLiteCommand(sql, conn))
                 {
 
-                    query.Parameters.Add(new SqlParameter("IdLote", SqlDbType.Int));
+                    query.Parameters.Add(new SQLiteParameter("IdLote"));
                     query.Parameters[0].Value = idLote;
 
                     using (var dataReader = query.ExecuteReader())
                     {
+
                         while (dataReader.Read())
                         {
                             #region id
                             int id = 0;
-                            if (dataReader[0] != DBNull.Value) id = int.Parse( dataReader[0].ToString());
+                            if (dataReader["id"] != null) id = int.Parse(dataReader["id"].ToString());
                             #endregion
 
                             #region nombre
                             string nombre = "";
-                            if (dataReader["nombre"] != DBNull.Value) nombre = dataReader["nombre"].ToString();
+                            if (dataReader["nombre"] != DBNull.Value) nombre =dataReader["nombre"].ToString();
                             #endregion
 
                             #region imagen
                             Image imagen = null;
-                            byte[] imagenByte = dataReader[2] as byte[];
+                            byte[] imagenByte = dataReader["imagen"] as byte[];
                             if (imagenByte != null)
                             {
                                 using (MemoryStream imageStream = new System.IO.MemoryStream(imagenByte))

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaoImplSqlServer", "DaoImpl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaoImplPostgreSql", "DaoImplPostgresql\DaoImplPostgreSql.csproj", "{4FC30C68-7622-40E7-9BBB-2ECD0EEA4AEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaoImplSqlite", "DaoImplSqlite\DaoImplSqlite.csproj", "{4F34CC0C-AFB3-499B-B2C5-DA18B34B05E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4FC30C68-7622-40E7-9BBB-2ECD0EEA4AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FC30C68-7622-40E7-9BBB-2ECD0EEA4AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FC30C68-7622-40E7-9BBB-2ECD0EEA4AEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F34CC0C-AFB3-499B-B2C5-DA18B34B05E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F34CC0C-AFB3-499B-B2C5-DA18B34B05E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F34CC0C-AFB3-499B-B2C5-DA18B34B05E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F34CC0C-AFB3-499B-B2C5-DA18B34B05E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

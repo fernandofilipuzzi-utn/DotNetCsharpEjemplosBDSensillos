@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.34114.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo1_ddl", "Ejemplo1_ddl\Ejemplo1_ddl.csproj", "{788108F4-D947-4EFF-B40B-2E21D0C02C61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo2_select", "Ejemplo2_select\Ejemplo2_select.csproj", "{5AD2B6E2-B7B9-4890-B470-FBDE4744A118}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo3_select", "Ejemplo3_select\Ejemplo3_select.csproj", "{5AD2B6E2-B7B9-4890-B470-FBDE4744A118}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelClassLibrary", "ModelClassLibrary\ModelClassLibrary.csproj", "{06DE17C5-E249-4913-A5AC-FFD57643918D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo3_insert", "Ejemplo3_insert\Ejemplo3_insert.csproj", "{3EB229C5-91BF-4C48-AED5-089D303C6DEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo2_insert", "Ejemplo2_insert\Ejemplo2_insert.csproj", "{3EB229C5-91BF-4C48-AED5-089D303C6DEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo4_update", "Ejemplo4_update\Ejemplo4_update.csproj", "{1C05D89F-9E92-48E0-92B1-F3374063CBA7}"
 EndProject

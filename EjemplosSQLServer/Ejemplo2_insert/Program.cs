@@ -19,7 +19,8 @@ namespace Ejemplo2_insert
                                                              new Producto {  Nombre = "arroz" }};
 
             #region parámetros
-            string servidor = "TSP\\SQLEXPRESS";
+            //string servidor = "TSP\\SQLEXPRESS";//para sql server express
+            string servidor = "TSP";//para sql server developer
             string baseDatos = "envios";
             #endregion
 
